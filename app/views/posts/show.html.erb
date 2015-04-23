@@ -1,0 +1,55 @@
+<div class="container">
+
+	<h2>Your post: </h2>
+
+	<div class="btn-group pull-right">
+	  <%= link_to like_post_path(@post), method: :put do %>
+	    <%= image_tag("Thumbs_Up.png", :size => '40x40') %>
+	    <%= @post.get_upvotes.size %>
+	  <% end %>
+	  <%= link_to dislike_post_path(@post), method: :put do %>
+	    <%= image_tag("Thumbs_down.png", :size => '40x40') %>
+	    <%= @post.get_downvotes.size %>
+	  <% end %>
+	</div>
+
+	<table>
+		<tr class="row">
+			<th class="col-sm-2">Title: </th>
+			<td class="col-sm-8"><strong><%= @post.title %></strong></td>
+			<td class="col-sm-2"> </td>
+		</tr>
+		<tr class="row">
+			<th class="col-sm-2">Created before: </th>
+			<td class="col-sm-8"><%= time_ago_in_words(@post.created_at) %></td> 
+			<td class="col-sm-2"> </td>
+		</tr>
+		<tr class="row">
+			<th class="col-sm-2">Body: </th>
+			<td class="col-sm-8"><%= @post.body%>  </td>
+			<td class="col-sm-2"> </td>
+		</tr>
+		<tr class="row">
+			<% if user_signed_in? && current_user.email == @post.user.email %>
+				<td class="col-sm-2"> </td>
+				 <td class="col-sm-2"><%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-larg btn-block btn-info'%> </td>  
+				 <td class="col-sm-2"><%= link_to "Delete", post_path(@post),:class => 'btn btn-larg btn-block btn-info', method: :delete, data: { confirm: 'Are you sure?'} %> </td>
+				 <td class="col-sm-2"> </td>
+			<%end %>
+		</tr>
+	</table>
+	
+	<hr>
+
+	<h2>Comments</h2>
+	<h5><strong><%= @post.comments.count%> Comments </strong></h5>
+
+	<div class="comment">
+		<!-- display comments -->
+		<%= render @post.comments %>
+
+
+		<!-- comment form -->
+		<%= render 'comments/form'%>
+	</div>
+</div>

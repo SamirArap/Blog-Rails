@@ -1,0 +1,14 @@
+<div class="container">
+	<h3>Edit post</h3>
+
+	<%= form_for @post do |f| %>
+		<%= render(:partial => 'form', :locals => {:f => f})%>
+		<table>
+			<tr class="row">
+				<th class="col-sm-2"></th>
+				<td class="col-sm-10"><%= f.submit 'Edit post', :class => 'btn btn-larg btn-block btn-info' %></td>
+			</tr>
+		</table>
+	<%end%>
+</div>
+<br>
