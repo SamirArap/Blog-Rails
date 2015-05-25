@@ -15,7 +15,7 @@
 	    </form>
 		
 		<div class="row">
-			<div class="col-md-4">We have <%= pluralize(@posts.size, 'post')%></div>
+			<div class="col-md-4">I have <%= pluralize(@posts.size, 'post')%></div>
 			<div class="col-md-4">
 				<% if user_signed_in?%>
 					<p>You are login like <strong><%= current_user.email %></strong></p>
